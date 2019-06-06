@@ -15,6 +15,20 @@ const Mutations = {
         
         return item;
     },
+
+    updateItem(parent, args, ctx, info) {
+        // First take a copy of the updates
+        const updates = {...args};
+        // Remove the ID from the updates
+        delete updates.id
+        // Run de update method
+        return ctx.db.mutation.updateItem({
+            data: updates,
+            where: {
+                id: args.id
+            }
+        }, info);
+    }
 };
 
 module.exports = Mutations;
